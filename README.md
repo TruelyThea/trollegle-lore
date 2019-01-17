@@ -16,7 +16,7 @@ Chat rooms send out *pulses*, or searches for new users. Pulses search for users
 
 You can send a message like you would on a regular Omegle chat. However, a Trollegle chat can do more. It features a number of *commands* to do specific actions. Typing `/help` for example should list the available commands. Typing `/rules` should tell you how users are expected to behave. At the very beginning of a message the character `/` indicates that the next word is a command. The available commands are a variant of the popular [Internet Relay Chat (IRC)](https://en.wikipedia.org/wiki/Internet_Relay_Chat) interface, but the set of available commands isn't identical to this interface.
 
-Some commands take *arguments*, or values that the command uses while performing it's action. The `/help` documentation will usually list these in capital letters in the order they should appear. One example is `/nick NAME`. The `/nick` command changes your nickname, which is displayed in front of every message you send. `NAME` is an argument, and is therefore a place holder for an arbitrary word. If you type `/nick Doug`, then you'll nickname will become `Doug`.
+Some commands take *arguments*, or values that the command uses while performing it's action. The `/help` documentation will usually list these in capital letters in the order they should appear. One example is `/nick NAME`. The `/nick` command changes your nickname, which is displayed in front of every message you send. `NAME` is an argument, and is therefore a place holder for an arbitrary word. If you type `/nick Doug`, then you'll nickname will become `Doug`. If you then type a message, like `hello everyone!`, everyone will see the message `[Doug] hello everyone!`.
 
 The `/me` command is used to tell everyone about an action you're doing. It takes an arbitrary list of arguments, which are simply treated as the words in a sentence. If you type `/me is very hungry.`,
 then a message will be sent to the room that says: `* [YourNickname] is very hungry.`
@@ -30,6 +30,10 @@ If you type an invalid argument, like a user that doesn't exist, or you don't gi
 Many commands have *aliases* or other names that you can use instead of the commands. A lot of these are much shorter, for example `/n` can be used instead of `/nick` and `/dids` instead of `/showids`. Unfortunately these aliases are not listed under `/help`, and you will need to look at the code in `UserBehavior.java` to find the aliases. All of the java source code for Trollegle is available [here](https://gitlab.com/jtrygva/trollegle). This means that any user can host their own chat room.
 
 The user that is hosting the chat room is referred to as the *admin*. They have a special, fixed id, `0`. The admin has access to plenty of special admin commands. Many admins host a modified version of the chat room that provides additional admin and user commands. Sometimes the standard behaviors described above won't apply in a modified chat room, depending on how it was built.
+
+If a user hasn't sent a message for a while, they are marked as a *lurker*. Other users cannot see lurkers or what they say, but lurkers can see other lurkers and what they say. Lurkers don't appear in regular users' `/list`, but they do appear in other lurkers' `/list`. `/nolurk` prevents a user from ever lurking and unlurks a lurking user, and `/lurk` reenables lurking.
+
+If a user has been inactive for a while (hasn't sent any message or command), then they are kicked from the chat. There is no command to prevent this; however, the [userscript](https://bellawhiskey.ca/trollegle/trollegle.js) includes an option to send a command periodically to prevent inactivity.
 
 ## About these pages ##
 
